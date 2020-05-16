@@ -1,0 +1,22 @@
+apiVersion: serving.knative.dev/v1 # Current version of Knative
+kind: Service
+metadata:
+  name: app-demo # The name of the app
+  namespace: default # The namespace the app will use
+spec:
+  template:
+    spec:
+      containers:
+        - image: arunvel1988/c1
+          env:
+            - name: env1 # The environment variable printed out by the sample app
+              value: "db"
+          ports:
+            - containerPort: 8000
+  traffic:
+  - tag: v1
+    revisionName: app-demo-9kp7h
+    percent: 50
+  - tag: v2
+    revisionName: app-demo-j2mtc 
+    percent: 50

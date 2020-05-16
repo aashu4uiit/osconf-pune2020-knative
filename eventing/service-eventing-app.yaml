@@ -1,0 +1,19 @@
+apiVersion: serving.knative.dev/v1 # Current version of Knative
+kind: Service
+metadata:
+  name: eventing-app-demo # The name of the app
+  namespace: default # The namespace the app will use
+spec:
+  template:
+    metadata:       
+      name: eventing-app-demo-v1
+      annotations:
+        autoscaling.knative.dev/target: "1"
+    spec:
+      containers:
+        - image: arunvel1988/c1          
+          env:
+            - name: env2 # The environment variable printed out by the sample app
+              value: "nosql"
+          ports:
+            - containerPort: 8000
